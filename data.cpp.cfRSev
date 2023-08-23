@@ -1,0 +1,72 @@
+#include "Data.h"
+
+Data::Data()
+{
+    
+}
+
+Data::~Data()
+{
+    storage.clear();
+}
+
+void Data::menueAusgabe()
+{
+  cout <<  "(1) Ort Anlegen " << endl
+        << "(2) Karte Anzeigen" << endl
+        << "(3) Karte Berechnen"  << endl
+        << "(4) Karte Expotieren/Importieren" << endl
+        << "(0) Navigationssystem verlassen" << endl;
+}
+
+void Data::ortAnlegen()
+{
+    cout << "- (1) Adresse " 
+         << "- (2) Point of Interest " << endl;
+    cout << "Geben sie ein was sie erstellen möchten" << endl;
+    int userInput;
+    cin >> userInput;
+
+    if (userInput == 1) {
+        int id, hausnummer, postleitzahl;
+        double laengenGrad, breitenGrad;
+        string strasse, gemeide;
+
+        cout << "Geben sie bitte die ID,LÄNGENGRAD, BREITENGRAD,STRASSE, HAUSNUMMER, POSTLEITZAHL, GEMEIDE ein" << endl;
+        cout << "Geben sie die ID, HAUSNUMMER, POSTLEIZZAHL ein" << endl;
+        cin >> id >> hausnummer >> postleitzahl;
+        cout << "Geben sie die LÄNGENGRAD, BREITENGRAD ein " << endl;
+        cin >> laengenGrad >> breitenGrad;
+        cout << "Geben sie die STRASSE, GEMEIDE ein " << endl;
+        cin >> strasse >> gemeide;
+        Adresse* adresse = new Adresse(id , laengenGrad, breitenGrad, strasse, hausnummer, postleitzahl, gemeide);
+        storage.push_back(adresse);
+        delete adresse;
+    } else {
+        int id;
+        double laengenGrad, breitenGrad;
+        string kategorie, bemerkung;
+
+        cout << "Geben sie bitte die ID, LÄNGENGRAD, BREITENGRAD, KATEGORIE, BEMERKUNG ein " << endl;
+        cin >> id;
+        cin >> laengenGrad >> breitenGrad;
+        cin >> kategorie >> bemerkung;
+        PointOfInterest* user = new PointOfInterest(id, laengenGrad, breitenGrad, kategorie, bemerkung);
+        storage.push_back(user);
+        delete user;
+    }
+    
+}
+
+void Data::karteAnzeigen()
+{
+    const int size = storage.size();
+
+    PointOfInterest* temp = new PointOfInterest;
+    Adresse* adresse = new Adresse;
+    for (int i = 0; i < size; i++) {
+        if (storage[i] == temp) {
+            PointOfInterest *temp = dynamic_cast<PointOfInterest*>(storage[i]);
+        }
+    }
+}
